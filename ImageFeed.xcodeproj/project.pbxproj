@@ -13,6 +13,7 @@
 		B592FB0F2C3B34E20084EE29 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = B592FB0E2C3B34E20084EE29 /* Base */; };
 		B592FB112C3B34E30084EE29 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B592FB102C3B34E30084EE29 /* Assets.xcassets */; };
 		B592FB142C3B34E30084EE29 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = B592FB132C3B34E30084EE29 /* Base */; };
+		B592FB1C2C3C01090084EE29 /* Vector.png in Resources */ = {isa = PBXBuildFile; fileRef = B592FB1B2C3C01090084EE29 /* Vector.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		B592FB102C3B34E30084EE29 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B592FB132C3B34E30084EE29 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B592FB152C3B34E30084EE29 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B592FB1B2C3C01090084EE29 /* Vector.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Vector.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +63,7 @@
 				B592FB0B2C3B34E20084EE29 /* ViewController.swift */,
 				B592FB0D2C3B34E20084EE29 /* Main.storyboard */,
 				B592FB102C3B34E30084EE29 /* Assets.xcassets */,
+				B592FB1B2C3C01090084EE29 /* Vector.png */,
 				B592FB122C3B34E30084EE29 /* LaunchScreen.storyboard */,
 				B592FB152C3B34E30084EE29 /* Info.plist */,
 			);
@@ -125,6 +128,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B592FB1C2C3C01090084EE29 /* Vector.png in Resources */,
 				B592FB112C3B34E30084EE29 /* Assets.xcassets in Resources */,
 				B592FB142C3B34E30084EE29 /* Base in Resources */,
 				B592FB0F2C3B34E20084EE29 /* Base in Resources */,
