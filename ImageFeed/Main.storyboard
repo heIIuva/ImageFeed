@@ -21,8 +21,8 @@
                         <color key="selectedImageTintColor" name="ypDark"/>
                     </tabBar>
                     <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="Cnk-UN-nKW"/>
-                        <segue destination="TvK-No-Xu1" kind="relationship" relationship="viewControllers" id="5Kg-2j-yvH"/>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="yBm-CY-PFO"/>
+                        <segue destination="TvK-No-Xu1" kind="relationship" relationship="viewControllers" id="kYo-AB-BOx"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Lsz-wB-sr2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -100,7 +100,7 @@
                                             <outlet property="cellImage" destination="UHT-CC-7rY" id="aTR-f0-IcK"/>
                                             <outlet property="dateLabel" destination="zZ7-qv-kLf" id="PMO-hM-SIr"/>
                                             <outlet property="gradientView" destination="zsc-u5-rig" id="8PT-9b-4Pb"/>
-                                            <outlet property="likeButton" destination="sdE-8c-JJO" id="huG-8Y-tcs"/>
+                                            <outlet property="likeButton" destination="sdE-8c-JJO" id="Ina-lO-raz"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -119,7 +119,9 @@
                             <constraint firstAttribute="top" secondItem="0ZD-Gs-GgP" secondAttribute="top" id="l0f-Ng-QVT"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="" selectedImage="tabEditorialActive" id="84T-1G-AV0"/>
+                    <tabBarItem key="tabBarItem" title="" image="tabEditorialActive" id="84T-1G-AV0">
+                        <color key="badgeColor" name="AccentColor"/>
+                    </tabBarItem>
                     <connections>
                         <outlet property="tableView" destination="0ZD-Gs-GgP" id="Fuw-16-5ad"/>
                         <segue destination="iL1-RN-h5A" kind="presentation" identifier="ShowSingleImage" modalPresentationStyle="fullScreen" id="Amx-hG-iiO"/>
@@ -212,71 +214,12 @@
                     <view key="view" contentMode="scaleToFill" id="M2e-Fj-1wv">
                         <rect key="frame" x="0.0" y="0.0" width="430" height="932"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Aom-WD-3Mx">
-                                <rect key="frame" x="16" y="169" width="216.66666666666666" height="75"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Екатерина Новикова" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yoj-Wy-ZmY" userLabel="nameLabel">
-                                        <rect key="frame" x="0.0" y="0.0" width="216.66666666666666" height="27.666666666666668"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="23"/>
-                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@ekaterina_nov" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EId-5p-f14" userLabel="tagLabel">
-                                        <rect key="frame" x="0.0" y="35.666666666666657" width="216.66666666666666" height="15.666666666666664"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hello, World!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="20Q-pW-zBY" userLabel="bioLabel">
-                                        <rect key="frame" x="0.0" y="59.333333333333336" width="216.66666666666666" height="15.666666666666664"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                            </stackView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profilePicture" translatesAutoresizingMaskIntoConstraints="NO" id="E3O-NG-mek">
-                                <rect key="frame" x="16" y="91" width="70" height="70"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="E3O-NG-mek" secondAttribute="height" multiplier="1:1" id="J9q-ep-Vbr"/>
-                                    <constraint firstAttribute="width" constant="70" id="Rvq-tK-qVS"/>
-                                    <constraint firstAttribute="height" constant="70" id="rBl-3v-kkg"/>
-                                </constraints>
-                            </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VMX-B6-nKT" userLabel="exitButton">
-                                <rect key="frame" x="370" y="104" width="44" height="44"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="6Ll-LK-PEq"/>
-                                    <constraint firstAttribute="width" constant="44" id="ZR3-Zs-d6c"/>
-                                    <constraint firstAttribute="width" secondItem="VMX-B6-nKT" secondAttribute="height" multiplier="1:1" id="k8z-3u-olQ"/>
-                                </constraints>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="exitButton"/>
-                                <connections>
-                                    <action selector="didTapLogoutButton" destination="TvK-No-Xu1" eventType="touchUpInside" id="hAX-b4-8q8"/>
-                                </connections>
-                            </button>
-                        </subviews>
                         <viewLayoutGuide key="safeArea" id="GcH-ki-7Q3"/>
                         <color key="backgroundColor" name="ypDark"/>
-                        <constraints>
-                            <constraint firstItem="VMX-B6-nKT" firstAttribute="centerY" secondItem="E3O-NG-mek" secondAttribute="centerY" id="2BQ-0F-Blk"/>
-                            <constraint firstItem="GcH-ki-7Q3" firstAttribute="trailing" secondItem="VMX-B6-nKT" secondAttribute="trailing" constant="16" id="3lY-aC-7Y3"/>
-                            <constraint firstItem="E3O-NG-mek" firstAttribute="top" secondItem="GcH-ki-7Q3" secondAttribute="top" constant="32" id="Fij-2w-Mip"/>
-                            <constraint firstItem="Aom-WD-3Mx" firstAttribute="top" secondItem="E3O-NG-mek" secondAttribute="bottom" constant="8" id="I69-rS-Rfi"/>
-                            <constraint firstItem="Aom-WD-3Mx" firstAttribute="leading" secondItem="E3O-NG-mek" secondAttribute="leading" id="R1N-4U-Pfm"/>
-                            <constraint firstItem="E3O-NG-mek" firstAttribute="leading" secondItem="GcH-ki-7Q3" secondAttribute="leading" constant="16" id="n73-JV-tdV"/>
-                        </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="" image="tabProfileActive" selectedImage="tabProfileActive" id="RWE-bC-fjH"/>
-                    <connections>
-                        <outlet property="bioLabel" destination="20Q-pW-zBY" id="X2p-lZ-ffb"/>
-                        <outlet property="exitButton" destination="VMX-B6-nKT" id="maC-cG-iFu"/>
-                        <outlet property="nameLabel" destination="Yoj-Wy-ZmY" id="E78-6D-IiT"/>
-                        <outlet property="profileImageView" destination="E3O-NG-mek" id="Psg-r0-vOt"/>
-                        <outlet property="tagLabel" destination="EId-5p-f14" id="NhC-mH-WWF"/>
-                    </connections>
+                    <tabBarItem key="tabBarItem" title="" image="tabProfileActive" id="RWE-bC-fjH">
+                        <color key="badgeColor" name="AccentColor"/>
+                    </tabBarItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MIf-6z-6Ha" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -285,13 +228,14 @@
     </scenes>
     <resources>
         <image name="0" width="1600" height="1059"/>
-        <image name="exitButton" width="24" height="24"/>
         <image name="goBackButton" width="24" height="24"/>
         <image name="likeButtonOn" width="42" height="42"/>
-        <image name="profilePicture" width="70" height="70"/>
         <image name="shareButton" width="51" height="51"/>
         <image name="tabEditorialActive" width="30" height="30"/>
         <image name="tabProfileActive" width="75" height="49"/>
+        <namedColor name="AccentColor">
+            <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="ypDark">
             <color red="0.10196078431372549" green="0.10588235294117647" blue="0.13333333333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
