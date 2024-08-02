@@ -46,7 +46,7 @@ final class ProfileViewController: UIViewController {
         view.addSubview(logoutButton)
         NSLayoutConstraint.activate([
             logoutButton.centerYAnchor.constraint(equalTo: profileImageView.centerYAnchor),
-            logoutButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 327),
+            logoutButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -24),
             logoutButton.widthAnchor.constraint(equalToConstant: 44),
             logoutButton.heightAnchor.constraint(equalToConstant: 44)
         ])
@@ -58,16 +58,19 @@ final class ProfileViewController: UIViewController {
         let bioLabel = UILabel()
         let labels = [nameLabel, tagLabel, bioLabel]
         
+        nameLabel.font = .SFPro.withWeight(.bold)
+        tagLabel.font = .SFPro.withSize(17).withWeight(.medium)
+        bioLabel.font = .SFPro.withSize(17).withWeight(.medium)
+        
         nameLabel.text = "Екатерина Новикова"
         tagLabel.text = "@ekaterina_nov"
         bioLabel.text = "Hello, world!"
         
-        nameLabel.font = nameLabel.font.withSize(23)
-        tagLabel.font = tagLabel.font.withSize(17)
-        bioLabel.font = bioLabel.font.withSize(17)
+        nameLabel.textColor = .ypWhite
+        tagLabel.textColor = .ypGray
+        bioLabel.textColor = .ypWhite
         
         for label in labels {
-            label.textColor = .white
             label.backgroundColor = .ypDark
             label.translatesAutoresizingMaskIntoConstraints = false
             view.addSubview(label)
