@@ -17,6 +17,8 @@
 		B592FB1C2C3C01090084EE29 /* Vector.png in Resources */ = {isa = PBXBuildFile; fileRef = B592FB1B2C3C01090084EE29 /* Vector.png */; };
 		B59410432C5769CB00C6A9CF /* SingleImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59410422C5769CB00C6A9CF /* SingleImageViewController.swift */; };
 		B59410452C576A2000C6A9CF /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59410442C576A2000C6A9CF /* ProfileViewController.swift */; };
+		B5AE71F92C5C58ED0026C836 /* UIFont+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AE71F82C5C58ED0026C836 /* UIFont+Extensions.swift */; };
+		B5AE71FB2C5C5F1F0026C836 /* SF-Pro.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B5AE71FA2C5C5F1F0026C836 /* SF-Pro.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +34,8 @@
 		B592FB1B2C3C01090084EE29 /* Vector.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Vector.png; sourceTree = "<group>"; };
 		B59410422C5769CB00C6A9CF /* SingleImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleImageViewController.swift; sourceTree = "<group>"; };
 		B59410442C576A2000C6A9CF /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		B5AE71F82C5C58ED0026C836 /* UIFont+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extensions.swift"; sourceTree = "<group>"; };
+		B5AE71FA2C5C5F1F0026C836 /* SF-Pro.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,14 +77,14 @@
 		B592FB062C3B34E20084EE29 /* ImageFeed */ = {
 			isa = PBXGroup;
 			children = (
+				B5AE71F72C5C58DC0026C836 /* Helpers */,
 				B53A41D32C3EDE4100C5F712 /* ImagesList */,
 				B59410402C57699200C6A9CF /* Profile */,
 				B59410412C5769A500C6A9CF /* SingleImageView */,
 				B592FB072C3B34E20084EE29 /* AppDelegate.swift */,
 				B592FB092C3B34E20084EE29 /* SceneDelegate.swift */,
-				B592FB102C3B34E30084EE29 /* Assets.xcassets */,
+				B5AE71F42C5C579A0026C836 /* Resources */,
 				B53A42012C481F9200C5F712 /* Main.storyboard */,
-				B592FB1B2C3C01090084EE29 /* Vector.png */,
 				B592FB122C3B34E30084EE29 /* LaunchScreen.storyboard */,
 				B592FB152C3B34E30084EE29 /* Info.plist */,
 			);
@@ -101,6 +105,24 @@
 				B59410422C5769CB00C6A9CF /* SingleImageViewController.swift */,
 			);
 			path = SingleImageView;
+			sourceTree = "<group>";
+		};
+		B5AE71F42C5C579A0026C836 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				B5AE71FA2C5C5F1F0026C836 /* SF-Pro.ttf */,
+				B592FB102C3B34E30084EE29 /* Assets.xcassets */,
+				B592FB1B2C3C01090084EE29 /* Vector.png */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		B5AE71F72C5C58DC0026C836 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				B5AE71F82C5C58ED0026C836 /* UIFont+Extensions.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -165,6 +187,7 @@
 				B53A42022C481F9200C5F712 /* Main.storyboard in Resources */,
 				B592FB112C3B34E30084EE29 /* Assets.xcassets in Resources */,
 				B592FB142C3B34E30084EE29 /* Base in Resources */,
+				B5AE71FB2C5C5F1F0026C836 /* SF-Pro.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -181,6 +204,7 @@
 				B53A41D22C3EDDD200C5F712 /* ImagesListCell.swift in Sources */,
 				B592FB082C3B34E20084EE29 /* AppDelegate.swift in Sources */,
 				B592FB0A2C3B34E20084EE29 /* SceneDelegate.swift in Sources */,
+				B5AE71F92C5C58ED0026C836 /* UIFont+Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
