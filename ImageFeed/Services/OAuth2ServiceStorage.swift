@@ -9,16 +9,25 @@ import Foundation
 
 
 final class OAuth2ServiceStorage {
+    
+    //MARK: - Singletone
+    
     static let shared = OAuth2ServiceStorage()
     private init() { }
     
-    var token: String? {
-        get {
-            UserDefaults.standard.string(forKey: Constants.token)
-        } set {
-            UserDefaults.standard.setValue(newValue, forKey: Constants.token)
-        }
+    //MARK: - Properties
+    
+    private let storage = UserDefaults.standard
+    private enum StorageKeys: String {
+        case token
     }
     
-    
+    var token: String? {
+        get {
+            storage.string(forKey: StorageKeys.token.rawValue)
+        }
+        set {
+            storage.setValue(newValue, forKey: StorageKeys.token.rawValue)
+        }
+    }
 }

@@ -8,12 +8,26 @@
 import UIKit
 
 
-final class AuthViewController: UIViewController {
-    private let oAuth2Service = OAuth2Service.shared
-    private let oAuth2Storage = OAuth2ServiceStorage.shared
-    private let WebViewSegueIdentifier = "WebViewSegue"
+protocol WebViewViewControllerDelegate: AnyObject {
+    func webViewViewController(_ vc: WebViewViewController, didAuthenticateWithCode code: String)
     
+    func webViewViewControllerDidCancel(_ vc: WebViewViewController)
+}
+
+
+final class AuthViewController: UIViewController {
+    
+    //MARK: - Singletone
+    
+    private let oAuth2Service = OAuth2Service.shared
+    private let oAuth2ServiceStorage = OAuth2ServiceStorage.shared
+    
+    //MARK: - Properties
+    
+    private let WebViewSegueIdentifier = "ShowWebView"
     weak var delegate: AuthViewControllerDelegate?
+    
+    //MARK: - Outlets
     
     @IBOutlet private weak var loginButton: UIButton! {
         didSet {
@@ -22,6 +36,8 @@ final class AuthViewController: UIViewController {
             loginButton.titleLabel?.font = .SFPro.withSize(17).withWeight(.bold)
         }
     }
+    
+    //MARK: - Methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,15 +65,24 @@ final class AuthViewController: UIViewController {
     
 }
 
+//MARK: - Extensions
 
 extension AuthViewController: WebViewViewControllerDelegate {
-    func webViewViewController(_ vc: WebViewViewController, didAuthenticateWithCode code: String) {
-        oAuth2Service.fetchOAuthToken(code: code) { [weak self] result in
-            guard let self, let delegate = self.delegate else { preconditionFailure("couldn't load AuthViewController") }
+    
+    //MARK: - Methods
+    
+    func webViewViewController(
+        _ vc: WebViewViewController,
+        didAuthenticateWithCode code: String
+    ) {
+        navigationController?.popToRootViewController(animated: true)
+        oAuth2Service.fetchOAuthToken(with: code) { [weak self] result in
+            guard let self else { preconditionFailure("couldn't load AuthViewController") }
             switch result {
             case .success(let token):
-                self.oAuth2Storage.token = token
-                delegate.didAuthenticate(self)
+                oAuth2ServiceStorage.token = token
+                print("token: \(token)")
+                self.delegate?.didAuthenticate(self)
             case .failure(let error):
                 print(error.localizedDescription)
             }
@@ -65,6 +90,6 @@ extension AuthViewController: WebViewViewControllerDelegate {
     }
     
     func webViewViewControllerDidCancel(_ vc: WebViewViewController) {
-        dismiss(animated: true)
+        
     }
 }

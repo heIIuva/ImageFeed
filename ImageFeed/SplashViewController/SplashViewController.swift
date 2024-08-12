@@ -8,25 +8,40 @@
 import UIKit
 
 
+protocol AuthViewControllerDelegate: AnyObject {
+    func didAuthenticate(_ vc: AuthViewController)
+}
+
+
 final class SplashViewController: UIViewController {
-    private let segueIdentifier = "ShowAuthScreen"
+    
+    //MARK: - Singletone
     
     private let oAuth2Service = OAuth2Service.shared
-    private let oAuth2Storage = OAuth2ServiceStorage.shared
+    private let oAuth2ServiceStorage = OAuth2ServiceStorage.shared
+    
+    //MARK: - Propeties
+    
+    private let segueIdentifier = "ShowAuthScreen"
+    
+    //MARK: - Methods
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        setNeedsStatusBarAppearanceUpdate()
+    }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        if oAuth2Storage.token != nil {
-            showTabBarController()
-        } else {
-            performSegue(withIdentifier: segueIdentifier, sender: nil)
-            }
-        }
+        chooseScreen()
+    }
     
     private func showTabBarController() {
         guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-              let window = windowScene.windows.first else {
+              let window = windowScene.windows.first 
+        else {
             assertionFailure("Invalid Configuration")
             return }
         
@@ -34,8 +49,16 @@ final class SplashViewController: UIViewController {
         window.rootViewController = tabBarController
     }
     
+    private func chooseScreen() {
+        if oAuth2ServiceStorage.token != nil {
+            showTabBarController()
+        } else {
+            performSegue(withIdentifier: segueIdentifier, sender: nil)
+        }
+    }
 }
 
+//MARK: - Extensions
 
 extension SplashViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -56,21 +79,5 @@ extension SplashViewController {
 extension SplashViewController: AuthViewControllerDelegate {
     func didAuthenticate(_ vc: AuthViewController) {
         vc.dismiss(animated: true)
-        showTabBarController()
-        }
-    
-    /*
-    private func fetchOAuthToken(_ code: String) {
-        oAuth2Service.fetchOAuthToken(code: code) { [weak self] result in
-            guard let self = self else { return }
-            switch result {
-            case .success:
-                self.showTabBarController()
-            case .failure:
-                // TODO [Sprint 11]
-                break
-            }
-        }
     }
-     */
 }

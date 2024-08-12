@@ -26,29 +26,36 @@ enum NetworkError: Error, LocalizedError {
 }
 
 extension URLSession {
-    func data(for request: URLRequest, completion: @escaping (Result<Data, Error>) -> Void) -> URLSessionTask {
-        let fulfillCompletionOnTheMainThread: (Result<Data, Error>) -> Void = { result in
-            DispatchQueue.main.async {
+    func data(
+        for request: URLRequest,
+        completion: @escaping (Result<Data, Error>) -> Void
+    ) -> URLSessionTask {
+        let fulfillCompletionOnMainThread: (Result<Data, Error>) -> Void = { result in
+            DispatchQueue.main.async{
                 completion(result)
             }
         }
-        
         let task = dataTask(with: request) { data, response, error in
-            if
-                let data = data,
-                let response = response,
-                let statusCode = (response as? HTTPURLResponse)?.statusCode
-            {
-                if 200..<300 ~= statusCode {
-                    fulfillCompletionOnTheMainThread(.success(data))
-                } else {
-                    fulfillCompletionOnTheMainThread(.failure(NetworkError.httpStatusCode(statusCode)))
+            guard let error else {
+                guard let data,
+                      let response,
+                      let statusCode = (response as? HTTPURLResponse)?.statusCode
+                else {
+                    print(NetworkError.urlSessionError.localizedDescription)
+                    return fulfillCompletionOnMainThread(
+                        .failure(NetworkError.urlSessionError))
                 }
-            } else if let error = error {
-                fulfillCompletionOnTheMainThread(.failure(NetworkError.urlRequestError(error)))
-            } else {
-                fulfillCompletionOnTheMainThread(.failure(NetworkError.urlSessionError))
+                guard 200..<300 ~= statusCode
+                else {
+                    print(NetworkError.httpStatusCode(statusCode).localizedDescription)
+                    print(String(data: data, encoding: .utf8) as Any)
+                    return fulfillCompletionOnMainThread(
+                        .failure(NetworkError.httpStatusCode(statusCode)))
+                }
+                return fulfillCompletionOnMainThread(.success(data))
             }
+            print(NetworkError.urlRequestError(error).localizedDescription)
+            fulfillCompletionOnMainThread(.failure(NetworkError.urlRequestError(error)))
         }
         return task
     }
