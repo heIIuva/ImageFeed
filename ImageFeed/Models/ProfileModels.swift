@@ -1,0 +1,24 @@
+//
+//  ProfileVCModels.swift
+//  ImageFeed
+//
+//  Created by big stepper on 18/08/2024.
+//
+
+import Foundation
+
+
+struct ProfileResult: Codable {
+    let username: String
+    let firstName: String
+    let lastName: String?
+    let bio: String?
+}
+
+struct Profile {
+    let profileResult: ProfileResult
+    var username: String { profileResult.username }
+    var name: String { profileResult.firstName + " " + (profileResult.lastName ?? "")}
+    var loginName: String { "@" + username}
+    var bio: String { profileResult.bio ?? ""}
+}

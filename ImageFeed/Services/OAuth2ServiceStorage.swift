@@ -18,7 +18,7 @@ final class OAuth2ServiceStorage {
     //MARK: - Properties
     
     private let storage = UserDefaults.standard
-    private enum StorageKeys: String {
+    enum StorageKeys: String {
         case token
     }
     

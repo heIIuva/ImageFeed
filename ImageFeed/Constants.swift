@@ -17,3 +17,7 @@ enum Constants {
     static let authorizeURLString: String = "https://unsplash.com/oauth/authorize"
 }
 
+enum AuthServiceError: Error {
+    case invalidRequest
+}
+

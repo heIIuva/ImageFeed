@@ -10,14 +10,27 @@ import UIKit
 
 final class ProfileViewController: UIViewController {
     
-    private var profileImageView = UIImageView()
+    //MARK: - Properties
+    
+    private let profileData = ProfileService.shared.profile
+    private let storage = OAuth2ServiceStorage.shared
+    
+    private var profileImageView: UIImageView?
+    private var nameLabel: UILabel?
+    private var loginLabel: UILabel?
+    private var bioLabel: UILabel?
+    private var logoutButton: UIButton?
+    
+    //MARK: - Methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setUpProfileImageView()
         setUpLogoutbutton()
-        setUpProfileLabels()
+        
+        guard let profileData else { return }
+        updateProfileInformation(profile: profileData)
     }
     
     private func setUpProfileImageView() {
@@ -44,30 +57,28 @@ final class ProfileViewController: UIViewController {
         logoutButton.backgroundColor = .ypDark
         logoutButton.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(logoutButton)
+        guard let profileImageView else { return }
         NSLayoutConstraint.activate([
             logoutButton.centerYAnchor.constraint(equalTo: profileImageView.centerYAnchor),
             logoutButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -24),
             logoutButton.widthAnchor.constraint(equalToConstant: 44),
             logoutButton.heightAnchor.constraint(equalToConstant: 44)
         ])
+        self.logoutButton = logoutButton
     }
     
     private func setUpProfileLabels() {
         let nameLabel = UILabel()
-        let tagLabel = UILabel()
+        let loginLabel = UILabel()
         let bioLabel = UILabel()
-        let labels = [nameLabel, tagLabel, bioLabel]
+        let labels = [nameLabel, loginLabel, bioLabel]
         
         nameLabel.font = .SFPro.withWeight(.bold)
-        tagLabel.font = .SFPro.withSize(17).withWeight(.medium)
+        loginLabel.font = .SFPro.withSize(17).withWeight(.medium)
         bioLabel.font = .SFPro.withSize(17).withWeight(.medium)
         
-        nameLabel.text = "Екатерина Новикова"
-        tagLabel.text = "@ekaterina_nov"
-        bioLabel.text = "Hello, world!"
-        
         nameLabel.textColor = .ypWhite
-        tagLabel.textColor = .ypGray
+        loginLabel.textColor = .ypGray
         bioLabel.textColor = .ypWhite
         
         for label in labels {
@@ -76,14 +87,28 @@ final class ProfileViewController: UIViewController {
             view.addSubview(label)
         }
         
+        guard let profileImageView else { return }
         NSLayoutConstraint.activate([
             nameLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             nameLabel.topAnchor.constraint(equalTo: profileImageView.bottomAnchor, constant: 8),
-            tagLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            tagLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 8),
+            loginLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            loginLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 8),
             bioLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            bioLabel.topAnchor.constraint(equalTo: tagLabel.bottomAnchor, constant: 8)
+            bioLabel.topAnchor.constraint(equalTo: loginLabel.bottomAnchor, constant: 8)
         ])
+        self.nameLabel = nameLabel
+        self.loginLabel = loginLabel
+        self.bioLabel = bioLabel
+    }
+    
+    private func updateProfileInformation(profile: Profile) {
+        setUpProfileLabels()
+        
+        nameLabel?.text = profile.name
+        loginLabel?.text = profile.loginName
+        bioLabel?.text = profile.bio
+        
+        print("user data set up successfully")
     }
     
     @objc

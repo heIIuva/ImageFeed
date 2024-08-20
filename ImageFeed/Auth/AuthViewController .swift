@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import ProgressHUD
 
 
 protocol WebViewViewControllerDelegate: AnyObject {
@@ -76,15 +77,19 @@ extension AuthViewController: WebViewViewControllerDelegate {
         didAuthenticateWithCode code: String
     ) {
         navigationController?.popToRootViewController(animated: true)
-        oAuth2Service.fetchOAuthToken(with: code) { [weak self] result in
-            guard let self else { preconditionFailure("couldn't load AuthViewController") }
-            switch result {
-            case .success(let token):
-                oAuth2ServiceStorage.token = token
-                print("token: \(token)")
-                self.delegate?.didAuthenticate(self)
-            case .failure(let error):
-                print(error.localizedDescription)
+        UIBlockingProgressHUD.show()
+        DispatchQueue.global().async {
+            self.oAuth2Service.fetchOAuthToken(with: code) { [weak self] result in
+                UIBlockingProgressHUD.dismiss()
+                guard let self else { preconditionFailure("couldn't load AuthViewController") }
+                switch result {
+                case .success(let token):
+                    oAuth2ServiceStorage.token = token
+                    print("token: \(token)")
+                    self.delegate?.didAuthenticate(self)
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
             }
         }
     }
