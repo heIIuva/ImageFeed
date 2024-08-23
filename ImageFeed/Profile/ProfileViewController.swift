@@ -6,14 +6,18 @@
 //
 
 import UIKit
+import Kingfisher
 
 
 final class ProfileViewController: UIViewController {
     
     //MARK: - Properties
     
+    private var profileImageServiceObserver: NSObjectProtocol?
+    
+    private let profileImageService = ProfileImageService.shared
     private let profileData = ProfileService.shared.profile
-    private let storage = OAuth2ServiceStorage.shared
+    private let storage = OAuth2Storage.shared
     
     private var profileImageView: UIImageView?
     private var nameLabel: UILabel?
@@ -31,6 +35,32 @@ final class ProfileViewController: UIViewController {
         
         guard let profileData else { return }
         updateProfileInformation(profile: profileData)
+        
+        profileImageServiceObserver = NotificationCenter.default
+            .addObserver(
+                forName: ProfileImageService.didChangeNotification,
+                object: nil,
+                queue: .main
+            ) { [weak self] _ in
+                guard let self = self else { return }
+                self.updateAvatar()
+            }
+        self.updateAvatar()
+    }
+    
+    private func updateAvatar() {
+        guard let profileImageURL = profileImageService.avatarURL,
+              let url = URL(string: profileImageURL),
+              let profileImageView
+        else { return }
+        
+        let cache = ImageCache.default
+        cache.clearMemoryCache()
+        cache.clearDiskCache()
+        
+        profileImageView.kf.indicatorType = .activity
+        profileImageView.kf.setImage(with: url,
+                              placeholder: UIImage(named: "avatarPlaceholder"))
     }
     
     private func setUpProfileImageView() {

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftKeychainWrapper
 
 
 protocol AuthViewControllerDelegate: AnyObject {
@@ -17,9 +18,10 @@ final class SplashViewController: UIViewController {
     
     //MARK: - Singletone
     
+    private let profileImageService = ProfileImageService.shared
     private let profileService = ProfileService.shared
     private let oAuth2Service = OAuth2Service.shared
-    private let storage = OAuth2ServiceStorage.shared
+    private let storage = OAuth2Storage.shared
     
     //MARK: - Propeties
     
@@ -27,11 +29,11 @@ final class SplashViewController: UIViewController {
     
     //MARK: - Methods
     
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//        
-//        UserDefaults.standard.removeObject(forKey: OAuth2ServiceStorage.StorageKeys.token.rawValue)
-//    }
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        //KeychainWrapper.standard.removeAllKeys()
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -99,8 +101,9 @@ extension SplashViewController: AuthViewControllerDelegate {
             guard let self else { return }
 
             switch result {
-            case .success:
-               self.showTabBarController()
+            case .success(let profile):
+                profileImageService.fetchProfileImageURL(token: token, username: profile.username) { _ in }
+                self.showTabBarController()
 
             case .failure:
                 // TODO [Sprint 11] Покажите ошибку получения профиля

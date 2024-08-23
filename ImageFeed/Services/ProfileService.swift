@@ -63,7 +63,7 @@ final class ProfileService {
                         let profile = Profile(profileResult: data)
                         self.profile = profile
                         completion(.success(profile))
-                    print("user data saved successfully \(self.profile?.name ?? "name")")
+                    print("user data saved successfully")
                 case .failure(let error):
                     completion(.failure(error))
                     print("couldn't fetch user data")

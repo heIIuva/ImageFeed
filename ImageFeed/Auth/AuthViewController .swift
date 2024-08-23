@@ -21,12 +21,13 @@ final class AuthViewController: UIViewController {
     //MARK: - Singletone
     
     private let oAuth2Service = OAuth2Service.shared
-    private let oAuth2ServiceStorage = OAuth2ServiceStorage.shared
+    private let storage = OAuth2Storage.shared
     
     //MARK: - Properties
     
     private let WebViewSegueIdentifier = "ShowWebView"
     weak var delegate: AuthViewControllerDelegate?
+    private var alertPresenter: AlertPresenterProtocol?
     
     //MARK: - Outlets
     
@@ -42,6 +43,10 @@ final class AuthViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let alertPresenter = AlertPresenter()
+        alertPresenter.delegate = self
+        self.alertPresenter = alertPresenter
         
         configureBackButton()
     }
@@ -84,10 +89,19 @@ extension AuthViewController: WebViewViewControllerDelegate {
                 guard let self else { preconditionFailure("couldn't load AuthViewController") }
                 switch result {
                 case .success(let token):
-                    oAuth2ServiceStorage.token = token
-                    print("token: \(token)")
+                    storage.token = token
+                    print("token fetched successfully: \(token)")
                     self.delegate?.didAuthenticate(self)
                 case .failure(let error):
+                    let completion = { [weak self] in
+                        guard let self else { return }
+                        self.navigationController?.popViewController(animated: true)
+                    }
+                    let viewModel = AlertModel(title: "Что-то пошло не так(",
+                                               message: "Не удалось войти в систему",
+                                               button: "Ok",
+                                               completion: completion)
+                    alertPresenter?.showAlert(result: viewModel)
                     print(error.localizedDescription)
                 }
             }

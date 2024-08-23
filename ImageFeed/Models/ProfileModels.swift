@@ -22,3 +22,13 @@ struct Profile {
     var loginName: String { "@" + username}
     var bio: String { profileResult.bio ?? ""}
 }
+
+struct UserResult: Codable {
+    let profileImage: UserImage
+}
+
+struct UserImage: Codable {
+    let small: String
+    let medium: String
+    let large: String
+}
