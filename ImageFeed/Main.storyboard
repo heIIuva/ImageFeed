@@ -145,10 +145,10 @@
             </objects>
             <point key="canvasLocation" x="-1007" y="1195"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Tab Bar View Controller-->
         <scene sceneID="Ojt-oL-aQc">
             <objects>
-                <tabBarController storyboardIdentifier="TabBarViewController" id="6ku-th-TDf" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="TabBarViewController" id="6ku-th-TDf" customClass="TabBarViewController" customModule="ImageFeed" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="mpA-pq-73u"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="WaE-Jz-g7E">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="49"/>
@@ -157,10 +157,6 @@
                         <color key="barTintColor" name="ypDark"/>
                         <color key="selectedImageTintColor" name="ypDark"/>
                     </tabBar>
-                    <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="yBm-CY-PFO"/>
-                        <segue destination="TvK-No-Xu1" kind="relationship" relationship="viewControllers" id="kYo-AB-BOx"/>
-                    </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Lsz-wB-sr2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -169,7 +165,7 @@
         <!--ImageList-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController title="ImageList" id="BYZ-38-t0r" customClass="ImagesListViewController" customModule="ImageFeed" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ImagesListViewController" title="ImageList" id="BYZ-38-t0r" customClass="ImagesListViewController" customModule="ImageFeed" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="430" height="932"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -347,7 +343,7 @@
         <!--Profile View Controller-->
         <scene sceneID="Zld-La-axr">
             <objects>
-                <viewController id="TvK-No-Xu1" customClass="ProfileViewController" customModule="ImageFeed" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ProfileViewController" id="TvK-No-Xu1" customClass="ProfileViewController" customModule="ImageFeed" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="M2e-Fj-1wv">
                         <rect key="frame" x="0.0" y="0.0" width="430" height="932"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

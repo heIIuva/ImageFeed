@@ -36,6 +36,7 @@
 		B5B1FA592C777CBA00F049E4 /* AlertModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B1FA582C777CBA00F049E4 /* AlertModel.swift */; };
 		B5B1FA5C2C77FE0D00F049E4 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = B5B1FA5B2C77FE0D00F049E4 /* Kingfisher */; };
 		B5B1FA5F2C7925AB00F049E4 /* SwiftKeychainWrapper in Frameworks */ = {isa = PBXBuildFile; productRef = B5B1FA5E2C7925AB00F049E4 /* SwiftKeychainWrapper */; };
+		B5B1FA622C7A858E00F049E4 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B1FA612C7A858E00F049E4 /* TabBarViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -67,6 +68,7 @@
 		B5B1FA542C74E4CD00F049E4 /* ProfileImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageService.swift; sourceTree = "<group>"; };
 		B5B1FA562C777C1E00F049E4 /* AlertPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertPresenter.swift; sourceTree = "<group>"; };
 		B5B1FA582C777CBA00F049E4 /* AlertModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertModel.swift; sourceTree = "<group>"; };
+		B5B1FA612C7A858E00F049E4 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +116,7 @@
 				B592FB072C3B34E20084EE29 /* AppDelegate.swift */,
 				B592FB092C3B34E20084EE29 /* SceneDelegate.swift */,
 				B5AE71FC2C5E54A60026C836 /* Constants.swift */,
+				B5B1FA602C7A857A00F049E4 /* TabBar */,
 				B5B1FA462C6413AE00F049E4 /* SplashViewController */,
 				B5AE720A2C63AF440026C836 /* Models */,
 				B5AE72052C63AB2E0026C836 /* Services */,
@@ -205,6 +208,14 @@
 			path = SplashViewController;
 			sourceTree = "<group>";
 		};
+		B5B1FA602C7A857A00F049E4 /* TabBar */ = {
+			isa = PBXGroup;
+			children = (
+				B5B1FA612C7A858E00F049E4 /* TabBarViewController.swift */,
+			);
+			path = TabBar;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -290,6 +301,7 @@
 			files = (
 				B5AE72022C60D36F0026C836 /* WebViewViewController.swift in Sources */,
 				B5AE72092C63AE420026C836 /* URLSession+Extensions.swift in Sources */,
+				B5B1FA622C7A858E00F049E4 /* TabBarViewController.swift in Sources */,
 				B59410452C576A2000C6A9CF /* ProfileViewController.swift in Sources */,
 				B5B1FA4F2C71FF1100F049E4 /* UIBlockingProgressHUD.swift in Sources */,
 				B5B1FA592C777CBA00F049E4 /* AlertModel.swift in Sources */,
