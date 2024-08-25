@@ -37,6 +37,7 @@
 		B5B1FA5C2C77FE0D00F049E4 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = B5B1FA5B2C77FE0D00F049E4 /* Kingfisher */; };
 		B5B1FA5F2C7925AB00F049E4 /* SwiftKeychainWrapper in Frameworks */ = {isa = PBXBuildFile; productRef = B5B1FA5E2C7925AB00F049E4 /* SwiftKeychainWrapper */; };
 		B5B1FA622C7A858E00F049E4 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B1FA612C7A858E00F049E4 /* TabBarViewController.swift */; };
+		B5B1FA642C7A893200F049E4 /* UIImageView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B1FA632C7A893200F049E4 /* UIImageView+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -69,6 +70,7 @@
 		B5B1FA562C777C1E00F049E4 /* AlertPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertPresenter.swift; sourceTree = "<group>"; };
 		B5B1FA582C777CBA00F049E4 /* AlertModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertModel.swift; sourceTree = "<group>"; };
 		B5B1FA612C7A858E00F049E4 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
+		B5B1FA632C7A893200F049E4 /* UIImageView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -164,6 +166,7 @@
 			children = (
 				B5AE71F82C5C58ED0026C836 /* UIFont+Extensions.swift */,
 				B5AE72082C63AE420026C836 /* URLSession+Extensions.swift */,
+				B5B1FA632C7A893200F049E4 /* UIImageView+Extensions.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -307,6 +310,7 @@
 				B5B1FA592C777CBA00F049E4 /* AlertModel.swift in Sources */,
 				B592FB0C2C3B34E20084EE29 /* ImagesListViewController.swift in Sources */,
 				B5AE72002C5EDDCC0026C836 /* AuthViewController .swift in Sources */,
+				B5B1FA642C7A893200F049E4 /* UIImageView+Extensions.swift in Sources */,
 				B5AE72042C639F8D0026C836 /* OAuth2Service.swift in Sources */,
 				B5B1FA512C7216E000F049E4 /* ProfileService.swift in Sources */,
 				B59410432C5769CB00C6A9CF /* SingleImageViewController.swift in Sources */,

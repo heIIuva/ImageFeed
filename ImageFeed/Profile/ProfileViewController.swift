@@ -19,7 +19,11 @@ final class ProfileViewController: UIViewController {
     private let profileData = ProfileService.shared.profile
     private let storage = OAuth2Storage.shared
     
-    private var profileImageView: UIImageView?
+    private var profileImageView: UIImageView? {
+        didSet {
+            profileImageView?.rounded()
+        }
+    }
     private var nameLabel: UILabel?
     private var loginLabel: UILabel?
     private var bioLabel: UILabel?
@@ -46,6 +50,8 @@ final class ProfileViewController: UIViewController {
                 self.updateAvatar()
             }
         self.updateAvatar()
+        
+        view.backgroundColor = .ypDark
     }
     
     private func updateAvatar() {
@@ -58,9 +64,11 @@ final class ProfileViewController: UIViewController {
         cache.clearMemoryCache()
         cache.clearDiskCache()
         
+        let processor = RoundCornerImageProcessor(cornerRadius: 20)
         profileImageView.kf.indicatorType = .activity
         profileImageView.kf.setImage(with: url,
-                              placeholder: UIImage(named: "avatarPlaceholder"))
+                                     placeholder: UIImage(named: "avatarPlaceholder"),
+                                     options: [.processor(processor)])
     }
     
     private func setUpProfileImageView() {
@@ -143,6 +151,6 @@ final class ProfileViewController: UIViewController {
     
     @objc
     private func didTapLogoutButton() {
-        
+        //TODO: add logout functionality
     }
 }
