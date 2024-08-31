@@ -54,6 +54,13 @@ final class ProfileViewController: UIViewController {
         view.backgroundColor = .ypDark
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        guard let profileImageServiceObserver else { return }
+        NotificationCenter.default.removeObserver(profileImageServiceObserver)
+    }
+    
     private func updateAvatar() {
         guard let profileImageURL = profileImageService.avatarURL,
               let url = URL(string: profileImageURL),
@@ -123,7 +130,6 @@ final class ProfileViewController: UIViewController {
             label.backgroundColor = .ypDark
             label.translatesAutoresizingMaskIntoConstraints = false
             view.addSubview(label)
-        }
         
         guard let profileImageView else { return }
         NSLayoutConstraint.activate([
