@@ -130,6 +130,7 @@ final class ProfileViewController: UIViewController {
             label.backgroundColor = .ypDark
             label.translatesAutoresizingMaskIntoConstraints = false
             view.addSubview(label)
+        }
         
         guard let profileImageView else { return }
         NSLayoutConstraint.activate([
