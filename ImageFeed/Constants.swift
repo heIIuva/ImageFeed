@@ -22,3 +22,9 @@ enum AuthServiceError: Error {
     case invalidRequest
 }
 
+enum HTTPMethods {
+    static let get = "GET"
+    static let post = "POST"
+    static let delete = "DELETE"
+}
+

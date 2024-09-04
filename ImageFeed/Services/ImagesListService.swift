@@ -43,18 +43,18 @@ final class ImagesListService {
         }
         var request = URLRequest(url: url)
         request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
-        request.httpMethod = "GET"
+        request.httpMethod = HTTPMethods.get
         return request
     }
     
-    private func makeLikesRequest(token: String, photoId: String) -> URLRequest? {
+    private func makeLikesRequest(token: String, photoId: String, httpMethod: String) -> URLRequest? {
         guard let url = URL(string: "/photos/\(photoId)/like", relativeTo: Constants.defaultBaseURL) else {
             assertionFailure("couldn't create URL")
             return nil
         }
         var request = URLRequest(url: url)
         request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
-        request.httpMethod = "GET"
+        request.httpMethod = httpMethod
         return request
     }
     
@@ -135,45 +135,53 @@ final class ImagesListService {
             return
         }
         
+        let httpMethod = isLiked ? HTTPMethods.post : HTTPMethods.delete
+        
         guard task == nil else {
             print(AuthServiceError.invalidRequest)
+            print("task is not nil")
             return
         }
         
-        guard let request = makeLikesRequest(token: token, photoId: photoId) else {
+        guard let request = makeLikesRequest(token: token, photoId: photoId, httpMethod: httpMethod) else {
             print(AuthServiceError.invalidRequest)
             print("invalid likes request")
             return
         }
         
-        let task =  urlSession.objectTask(for: request) { [weak self] (result: Result<LikeResult, Error>) in
-            guard let self else { return }
-            switch result {
-            case .success(let likeResult):
-                DispatchQueue.main.async {
-                    let likedByUser = likeResult.likedByUser
-                    if let index = self.photos.firstIndex(where: { $0.id == photoId }) {
-                        let photo = self.photos[index]
-                        let newPhoto = Photo(id: photo.id,
-                                             size: photo.size,
-                                             createdAt: photo.createdAt,
-                                             welcomeDescription: photo.welcomeDescription,
-                                             thumbImageURL: photo.thumbImageURL,
-                                             largeImageURL: photo.largeImageURL,
-                                             isLiked: !photo.isLiked,
-                                             thumbSize: photo.thumbSize)
-                        self.photos[index] = newPhoto
-                    }
-                    completion(.success(likedByUser))
-                    print("like data fetched successfully")
+        let task =  urlSession.objectTask(for: request) { [weak self] (result: Result<Like, Error>) in
+            DispatchQueue.main.async {
+                guard let self else { return }
+                switch result {
+                case .success(let likeData):
+                        let likedByUser = likeData.photo.likedByUser
+                        if let index = self.photos.firstIndex(where: { $0.id == photoId }) {
+                            let photo = self.photos[index]
+                            let newPhoto = Photo(id: photo.id,
+                                                 size: photo.size,
+                                                 createdAt: photo.createdAt,
+                                                 welcomeDescription: photo.welcomeDescription,
+                                                 thumbImageURL: photo.thumbImageURL,
+                                                 largeImageURL: photo.largeImageURL,
+                                                 isLiked: likedByUser,
+                                                 thumbSize: photo.thumbSize)
+                            self.photos[index] = newPhoto
+                            print("isLiked property updated successfully")
+                        } else {
+                            print("could't update isLiked property")
+                        }
+                        completion(.success(likedByUser))
+                        print("like data fetched successfully")
+                case .failure(let error):
+                    completion(.failure(error))
+                    print("couldn't fetch like data")
                 }
-            case .failure(let error):
-                completion(.failure(error))
-                print("coudn't fetch like data")
+                self.task = nil
             }
-            self.task = nil
         }
         self.task = task
         task.resume()
     }
 }
+
+

@@ -10,7 +10,7 @@ import Kingfisher
 
 final class ImagesListViewController: UIViewController {
     
-    //MARK: - Properties
+    //MARK: - Outlets
     
     @IBOutlet private var tableView: UITableView! {
         didSet {
@@ -18,11 +18,14 @@ final class ImagesListViewController: UIViewController {
         }
     }
     
+    //MARK: - Properties
+    
     private var imagesListServiceObserver: NSObjectProtocol?
     
     private let storage = OAuth2Storage.shared
     private let imagesListService = ImagesListService.shared
     private let showSingleImageSegueIdentifier = "ShowSingleImage"
+    private var alertPresenter: AlertPresenterProtocol?
     private var photos: [Photo] = []
 
     private lazy var dateFormatter: DateFormatter = {
@@ -41,6 +44,10 @@ final class ImagesListViewController: UIViewController {
         tableView.contentInset = UIEdgeInsets(top: 12, left: 0, bottom: 12, right: 0)
         
         updateTableView()
+        
+        let alertPresenter = AlertPresenter()
+        alertPresenter.delegate = self
+        self.alertPresenter = alertPresenter
         
         imagesListServiceObserver = NotificationCenter.default
             .addObserver(
@@ -106,6 +113,7 @@ extension ImagesListViewController: UITableViewDataSource {
     }
 }
 
+
 extension ImagesListViewController {
     func configCell(for cell: ImagesListCell, with indexPath: IndexPath) {
         let imageURL = photos[indexPath.row].thumbImageURL
@@ -117,8 +125,10 @@ extension ImagesListViewController {
                                    placeholder: UIImage(named: "stub"),
                                    options: [.processor(processor)])
         cell.dateLabel.text = dateFormatter.string(from: photos[indexPath.row].createdAt ?? Date())
-        
         cell.layer.cornerRadius = 16
+        
+        let photo = photos[indexPath.row]
+        cell.setIsLiked(isLiked: photo.isLiked)
     }
     
     func updateTableViewAnimated() {
@@ -139,6 +149,7 @@ extension ImagesListViewController {
     }
 }
 
+
 extension ImagesListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         performSegue(withIdentifier: showSingleImageSegueIdentifier, sender: indexPath)
@@ -155,6 +166,7 @@ extension ImagesListViewController: UITableViewDelegate {
     }
 }
 
+
 extension ImagesListViewController: ImagesListCellDelegate {
     func imageListCellDidTapLike(_ cell: ImagesListCell) {
         guard let token = storage.token,
@@ -166,19 +178,15 @@ extension ImagesListViewController: ImagesListCellDelegate {
             guard let self else { return }
             switch result {
             case .success(let isLiked):
-                DispatchQueue.main.async {
                     self.photos[indexPath.row].isLiked = isLiked
                     cell.setIsLiked(isLiked: isLiked)
-                    UIBlockingProgressHUD.dismiss()
-                }
-            case .failure(let error):
-                print("error occured \(error)")
                 UIBlockingProgressHUD.dismiss()
+            case .failure(let error):
+                UIBlockingProgressHUD.dismiss()
+                let alert = AlertModel(title: "something went wrong",
+                                       message: "check your internet connection",
+                                       button: "try again"){}
             }
-
         }
     }
-    
-    
 }
-

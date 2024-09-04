@@ -37,11 +37,10 @@ struct URLSResult: Decodable {
 }
 
 
-struct LikeResult: Decodable {
+struct LikeResult: Codable {
     let likedByUser: Bool
 }
 
-
-struct Like: Decodable {
-    let isLiked: LikeResult
+struct Like: Codable {
+    let photo: LikeResult
 }
