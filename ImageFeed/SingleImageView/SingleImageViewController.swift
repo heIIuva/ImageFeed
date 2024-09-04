@@ -6,9 +6,13 @@
 //
 
 import UIKit
+import Kingfisher
 
 
 final class SingleImageViewController: UIViewController {
+    
+    //MARK: - Properties
+    
     var image: UIImage? {
         didSet {
             guard isViewLoaded, let image else { return }
@@ -18,17 +22,37 @@ final class SingleImageViewController: UIViewController {
             rescaleAndCenterImageInScrollView(image: image)
         }
     }
-
+    
+    var largeImageUrl: URL?
+    
+    //MARK: - Outlets
+    
     @IBOutlet private var scrollView: UIScrollView!
     @IBOutlet private var imageView: UIImageView!
 
+    //MARK: - Methods
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         scrollView.minimumZoomScale = 0.1
         scrollView.maximumZoomScale = 1.25
 
-        guard let image else { return }
-        imageView.image = image
+        guard let image, let largeImageUrl else { return }
+        UIBlockingProgressHUD.show()
+            imageView.kf.setImage(with: largeImageUrl,
+                                  placeholder: UIImage(named: "stub")
+            ){ [weak self] result in
+                UIBlockingProgressHUD.dismiss()
+                guard let self else { return }
+                switch result {
+                case .success(let image):
+                  self.image = image.image
+                  self.rescaleAndCenterImageInScrollView(image: image.image)
+                case .failure:
+                    print("unable to load image")
+            }
+        }
+        
         imageView.frame.size = image.size
         rescaleAndCenterImageInScrollView(image: image)
     }
@@ -77,6 +101,8 @@ final class SingleImageViewController: UIViewController {
         scrollView.layoutIfNeeded()
     }
 }
+
+//MARK: - Extensions
 
 extension SingleImageViewController: UIScrollViewDelegate {
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {

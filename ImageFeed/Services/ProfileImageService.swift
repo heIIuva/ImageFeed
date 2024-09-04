@@ -22,7 +22,7 @@ final class ProfileImageService {
     private let urlSession = URLSession.shared
     
     private var task: URLSessionTask?
-    private (set) var avatarURL: String?
+    private(set) var avatarURL: String?
     
     //MARK: - Methods
     
