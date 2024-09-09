@@ -35,3 +35,12 @@ final class OAuth2Storage {
         }
     }
 }
+
+//MARK: - Logout
+
+extension OAuth2Storage {
+    func cleanToken() {
+        storage.removeObject(forKey: StorageKeys.token.rawValue)
+    }
+}
+    

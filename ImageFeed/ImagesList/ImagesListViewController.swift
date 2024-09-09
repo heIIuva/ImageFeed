@@ -184,8 +184,9 @@ extension ImagesListViewController: ImagesListCellDelegate {
             case .failure(let error):
                 UIBlockingProgressHUD.dismiss()
                 let alert = AlertModel(title: "something went wrong",
-                                       message: "check your internet connection",
+                                       message: "check your internet connection\n\(error)",
                                        button: "try again"){}
+                alertPresenter?.showAlert(result: alert)
             }
         }
     }

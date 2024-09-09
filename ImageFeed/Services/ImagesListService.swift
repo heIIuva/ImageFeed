@@ -184,4 +184,10 @@ final class ImagesListService {
     }
 }
 
+//MARK: - Logout
 
+extension ImagesListService {
+    func cleanPhotos() {
+        self.photos = []
+    }
+}

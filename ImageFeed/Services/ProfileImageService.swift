@@ -82,3 +82,10 @@ final class ProfileImageService {
     }
 }
 
+//MARK: - Logout
+
+extension ProfileImageService {
+    func cleanAvatar() {
+        self.avatarURL = nil
+    }
+}

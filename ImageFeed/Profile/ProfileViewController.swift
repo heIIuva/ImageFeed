@@ -18,6 +18,7 @@ final class ProfileViewController: UIViewController {
     private let profileImageService = ProfileImageService.shared
     private let profileData = ProfileService.shared.profile
     private let storage = OAuth2Storage.shared
+    private let logoutService = ProfileLogoutService.shared
     
     private var profileImageView: UIImageView? {
         didSet {
@@ -158,6 +159,6 @@ final class ProfileViewController: UIViewController {
     
     @objc
     private func didTapLogoutButton() {
-        //TODO: add logout functionality
+        logoutService.logout()
     }
 }

@@ -75,3 +75,11 @@ final class ProfileService {
         task.resume()
     }
 }
+
+//MARK: - Logout
+
+extension ProfileService {
+    func cleanProfile() {
+        self.profile = nil
+    }
+}

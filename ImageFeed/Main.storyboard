@@ -236,18 +236,18 @@
                                 <rect key="frame" x="0.0" y="0.0" width="430" height="932"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="eP3-EB-VaR" userLabel="imageView">
-                                        <rect key="frame" x="0.0" y="0.0" width="1600" height="1059"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="430" height="932"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="1600" id="1wv-gI-vAg"/>
-                                            <constraint firstAttribute="height" constant="1059" id="YK3-1h-5my"/>
+                                            <constraint firstAttribute="width" constant="430" id="1wv-gI-vAg"/>
+                                            <constraint firstAttribute="height" constant="932" id="YK3-1h-5my"/>
                                         </constraints>
                                     </imageView>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="Nh6-oy-bz4" firstAttribute="trailing" secondItem="eP3-EB-VaR" secondAttribute="trailing" id="LHT-Iw-Oe3"/>
-                                    <constraint firstItem="eP3-EB-VaR" firstAttribute="leading" secondItem="Nh6-oy-bz4" secondAttribute="leading" id="Ovk-iR-m1b"/>
-                                    <constraint firstItem="Nh6-oy-bz4" firstAttribute="bottom" secondItem="eP3-EB-VaR" secondAttribute="bottom" id="a6G-Um-Agn"/>
-                                    <constraint firstItem="eP3-EB-VaR" firstAttribute="top" secondItem="Nh6-oy-bz4" secondAttribute="top" id="jdd-lG-N54"/>
+                                    <constraint firstAttribute="trailing" secondItem="eP3-EB-VaR" secondAttribute="trailing" id="LHT-Iw-Oe3"/>
+                                    <constraint firstItem="eP3-EB-VaR" firstAttribute="leading" secondItem="opB-GE-E3e" secondAttribute="leading" id="Ovk-iR-m1b"/>
+                                    <constraint firstAttribute="bottom" secondItem="eP3-EB-VaR" secondAttribute="bottom" id="a6G-Um-Agn"/>
+                                    <constraint firstItem="eP3-EB-VaR" firstAttribute="top" secondItem="opB-GE-E3e" secondAttribute="top" id="jdd-lG-N54"/>
                                 </constraints>
                                 <viewLayoutGuide key="contentLayoutGuide" id="Nh6-oy-bz4"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="6Bx-77-t8M"/>

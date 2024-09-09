@@ -37,7 +37,7 @@ final class SingleImageViewController: UIViewController {
         scrollView.minimumZoomScale = 0.1
         scrollView.maximumZoomScale = 1.25
 
-        guard let image, let largeImageUrl else { return }
+        guard let largeImageUrl else { return }
         UIBlockingProgressHUD.show()
             imageView.kf.setImage(with: largeImageUrl,
                                   placeholder: UIImage(named: "stub")
@@ -53,8 +53,9 @@ final class SingleImageViewController: UIViewController {
             }
         }
         
-        imageView.frame.size = image.size
-        rescaleAndCenterImageInScrollView(image: image)
+//        guard let image else { return }
+//        imageView.frame.size = image.size
+//        rescaleAndCenterImageInScrollView(image: image)
     }
 
     @IBAction private func didTapBackButton() {
@@ -70,35 +71,29 @@ final class SingleImageViewController: UIViewController {
         present(share, animated: true, completion: nil)
     }
     
-    private func configureScale(image: UIImage) {
+    private func rescaleAndCenterImageInScrollView(image: UIImage) {
+        imageView.bounds.size = image.size
         let minZoomScale = scrollView.minimumZoomScale
         let maxZoomScale = scrollView.maximumZoomScale
-        view.layoutIfNeeded()
         let visibleRectSize = scrollView.bounds.size
         let imageSize = image.size
-        let hScale = visibleRectSize.width / imageSize.width
-        let vScale = visibleRectSize.height / imageSize.height
-        let scale = min(maxZoomScale, max(minZoomScale, min(hScale, vScale)))
+        let hScale = visibleRectSize.height / imageSize.height
+        let wScale = visibleRectSize.width / imageSize.width
+        let scale = min(maxZoomScale, max(hScale, wScale))
+        scrollView.minimumZoomScale = min(maxZoomScale, max(minZoomScale, min(hScale, wScale)))
+        scrollView.maximumZoomScale = 3 * scale
         scrollView.setZoomScale(scale, animated: false)
         scrollView.layoutIfNeeded()
-    }
-    
-    private func rescaleAndCenterImageInScrollView(image: UIImage) {
-        configureScale(image: image)
-        let visibleRectSize = scrollView.bounds.size
         let newContentSize = scrollView.contentSize
         let x = (newContentSize.width - visibleRectSize.width) / 2
         let y = (newContentSize.height - visibleRectSize.height) / 2
         scrollView.setContentOffset(CGPoint(x: x, y: y), animated: false)
     }
     
-    private func centerImageAfterZooming(image: UIImage) {
-        configureScale(image: image)
-        let scrollViewSize = scrollView.bounds.size
-        let imageViewSize = imageView.frame.size
-        let inset = (scrollViewSize.height - imageViewSize.height) / 2
-        scrollView.contentInset = UIEdgeInsets(top: inset, left: 0, bottom: inset, right: 0)
-        scrollView.layoutIfNeeded()
+    private func centerImageAfterZooming() {
+        let xInset = max((scrollView.bounds.width - scrollView.contentSize.width) / 2, 0)
+        let yInset = max((scrollView.bounds.height - scrollView.contentSize.height) / 2, 0)
+        scrollView.contentInset = UIEdgeInsets(top: yInset, left: xInset, bottom: yInset, right: xInset)
     }
 }
 
@@ -110,9 +105,7 @@ extension SingleImageViewController: UIScrollViewDelegate {
     }
    
     func scrollViewDidEndZooming(_ scrollView: UIScrollView, with view: UIView?, atScale scale: CGFloat) {
-        guard let image else { return }
-        
-        centerImageAfterZooming(image: image)
+        centerImageAfterZooming()
     }
     
 }

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		B53A41D22C3EDDD200C5F712 /* ImagesListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53A41D12C3EDDD200C5F712 /* ImagesListCell.swift */; };
 		B53A42022C481F9200C5F712 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B53A42012C481F9200C5F712 /* Main.storyboard */; };
+		B55870972C8EF69C00094B49 /* ProfileLogoutService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55870962C8EF69C00094B49 /* ProfileLogoutService.swift */; };
 		B592FB082C3B34E20084EE29 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B592FB072C3B34E20084EE29 /* AppDelegate.swift */; };
 		B592FB0A2C3B34E20084EE29 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B592FB092C3B34E20084EE29 /* SceneDelegate.swift */; };
 		B592FB0C2C3B34E20084EE29 /* ImagesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B592FB0B2C3B34E20084EE29 /* ImagesListViewController.swift */; };
@@ -55,6 +56,7 @@
 /* Begin PBXFileReference section */
 		B53A41D12C3EDDD200C5F712 /* ImagesListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesListCell.swift; sourceTree = "<group>"; };
 		B53A42012C481F9200C5F712 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		B55870962C8EF69C00094B49 /* ProfileLogoutService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileLogoutService.swift; sourceTree = "<group>"; };
 		B592FB042C3B34E20084EE29 /* ImageFeed.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImageFeed.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B592FB072C3B34E20084EE29 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B592FB092C3B34E20084EE29 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -213,6 +215,7 @@
 				B5B1FA542C74E4CD00F049E4 /* ProfileImageService.swift */,
 				B5B1FA562C777C1E00F049E4 /* AlertPresenter.swift */,
 				B5F0F7D42C85C65400500C84 /* ImagesListService.swift */,
+				B55870962C8EF69C00094B49 /* ProfileLogoutService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -372,6 +375,7 @@
 				B5B1FA512C7216E000F049E4 /* ProfileService.swift in Sources */,
 				B59410432C5769CB00C6A9CF /* SingleImageViewController.swift in Sources */,
 				B53A41D22C3EDDD200C5F712 /* ImagesListCell.swift in Sources */,
+				B55870972C8EF69C00094B49 /* ProfileLogoutService.swift in Sources */,
 				B592FB082C3B34E20084EE29 /* AppDelegate.swift in Sources */,
 				B5B1FA552C74E4CD00F049E4 /* ProfileImageService.swift in Sources */,
 				B592FB0A2C3B34E20084EE29 /* SceneDelegate.swift in Sources */,
