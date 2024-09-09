@@ -59,23 +59,14 @@ final class ImagesListViewController: UIViewController {
                 self.updateTableViewAnimated()
         }
     }
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == showSingleImageSegueIdentifier {
-            guard
-                let viewController = segue.destination as? SingleImageViewController,
-                let indexPath = sender as? IndexPath
-            else {
-                assertionFailure("Invalid segue destination")
-                return
-            }
-            
-            guard let imageURL = URL(string: photos[indexPath.row].largeImageURL) else { return }
-            viewController.largeImageUrl = imageURL
-            
-        } else {
-            super.prepare(for: segue, sender: sender)
-        }
+    
+    private func showSingleImageViewController(indexPath: IndexPath) {
+        let viewController = SingleImageViewController()
+        guard let imageURL = URL(string: photos[indexPath.row].largeImageURL) else { return }
+        viewController.largeImageUrl = imageURL
+        viewController.modalPresentationStyle = .fullScreen
+        viewController.modalTransitionStyle = .crossDissolve
+        present(viewController, animated: true)
     }
     
     private func updateTableView() {
@@ -149,10 +140,11 @@ extension ImagesListViewController {
     }
 }
 
+//MARK: - Extensions
 
 extension ImagesListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: showSingleImageSegueIdentifier, sender: indexPath)
+        showSingleImageViewController(indexPath: indexPath)
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
