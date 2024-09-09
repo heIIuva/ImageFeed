@@ -15,6 +15,13 @@ final class OAuth2Service {
     static let shared = OAuth2Service()
     private init() {}
     
+    //MARK: - Properties
+    
+    private let urlSession = URLSession.shared
+    
+    private var task: URLSessionTask?
+    private var lastCode: String?
+    
     //MARK: - Methods
     
     private func makeOAuthTokenRequest(code: String) -> URLRequest? {
@@ -38,26 +45,40 @@ final class OAuth2Service {
         with code: String,
         completion: @escaping(_ result: Result<String, Error>) -> Void
     ) {
+        guard Thread.isMainThread else {
+            DispatchQueue.main.async { [weak self] in
+                guard let self else { return }
+                self.fetchOAuthToken(with: code, completion: completion)
+            }
+            return
+        }
+        guard lastCode != code else {                               // 1
+            completion(.failure(AuthServiceError.invalidRequest))
+            return
+        }
+        task?.cancel()
+        lastCode = code
+        
         guard let request = makeOAuthTokenRequest(code: code) else {
-        print("invalid fetch token request")
+        completion(.failure(AuthServiceError.invalidRequest))
         return }
         
-        let dataTask = URLSession.shared.data(for: request) { result in
-            switch result {
-            case .success(let data):
-                do {
-                    let decoder = JSONDecoder()
-                    let responseBody = try decoder.decode(OAuthTokenResponseBody.self, from: data)
-                    completion(.success(responseBody.accessToken))
-                } catch {
+        let task = urlSession.objectTask(for: request) { [weak self] (result: Result<OAuthTokenResponseBody, Error>) in
+                guard let self else { return }
+                switch result {
+                case .success(let responseBody):
+                    let token = responseBody.accessToken
+                    completion(.success(token))
+                    print("OAuth token decoded successfully")
+                case .failure(let error):
+                    completion(.failure(error))
                     print("couldn't decode OAuth token")
-                    completion(.failure(DecoderError.decodingError(error)))
                 }
-            case .failure(let error):
-                completion(.failure(error))
+                self.task = nil
+                self.lastCode = nil
             }
-        }
-        dataTask.resume()
+        self.task = task
+        task.resume()
     }
 }
 
