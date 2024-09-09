@@ -19,12 +19,13 @@ final class ProfileViewController: UIViewController {
     private let profileData = ProfileService.shared.profile
     private let storage = OAuth2Storage.shared
     private let logoutService = ProfileLogoutService.shared
+    private var alertPresenter: AlertPresenterProtocol?
     
-    private var profileImageView: UIImageView? {
-        didSet {
-            profileImageView?.rounded()
-        }
-    }
+    private lazy var profileImageView: UIImageView? = {
+        let profileImageView = UIImageView()
+        profileImageView.rounded()
+        return profileImageView
+    }()
     private var nameLabel: UILabel?
     private var loginLabel: UILabel?
     private var bioLabel: UILabel?
@@ -34,6 +35,10 @@ final class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let alertPresenter = AlertPresenter()
+        alertPresenter.delegate = self
+        self.alertPresenter = alertPresenter
         
         setUpProfileImageView()
         setUpLogoutbutton()
@@ -170,6 +175,14 @@ final class ProfileViewController: UIViewController {
     
     @objc
     private func didTapLogoutButton() {
-        logoutService.logout()
+        let viewModel = AlertModel(title: "Пока, пока!",
+                                   message: "Уверены что хотите выйти?",
+                                   button: "Да",
+                                   completion: { self.logoutService.logout() },
+                                   secondButton: "Нет",
+                                   secondCompletion: {self.dismiss(animated: true)})
+        alertPresenter?.showAlert(result: viewModel)
+        
     }
 }
+

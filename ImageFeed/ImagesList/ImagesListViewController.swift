@@ -12,11 +12,11 @@ final class ImagesListViewController: UIViewController {
     
     //MARK: - Outlets
     
-    @IBOutlet private var tableView: UITableView! {
-        didSet {
-            self.tableView.backgroundColor = UIColor.ypDark
-        }
-    }
+    @IBOutlet private lazy var tableView: UITableView! = {
+        let tableView = UITableView()
+        tableView.backgroundColor = UIColor.ypDark
+        return tableView
+    }()
     
     //MARK: - Properties
     
@@ -28,12 +28,7 @@ final class ImagesListViewController: UIViewController {
     private var alertPresenter: AlertPresenterProtocol?
     private var photos: [Photo] = []
 
-    private lazy var dateFormatter: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.dateStyle = .long
-        formatter.timeStyle = .none
-        return formatter
-    }()
+    private let dateFormatter = DateFormatter.dateFormatter
     
     //MARK: - Methods
     
@@ -72,6 +67,9 @@ final class ImagesListViewController: UIViewController {
         self.tabBarItem = UITabBarItem(title: "",
                                        image: UIImage(named: "tabEditorialInactive"),
                                        selectedImage: nil)
+        
+        guard let imagesListServiceObserver else { return }
+        NotificationCenter.default.removeObserver(imagesListServiceObserver)
     }
     
     private func showSingleImageViewController(indexPath: IndexPath) {
@@ -182,13 +180,12 @@ extension ImagesListViewController: ImagesListCellDelegate {
         UIBlockingProgressHUD.show()
         imagesListService.changeLike(token: token, photoId: photo.id, isLiked: !photo.isLiked) { [weak self] result in
             guard let self else { return }
+            UIBlockingProgressHUD.dismiss()
             switch result {
             case .success(let isLiked):
                     self.photos[indexPath.row].isLiked = isLiked
                     cell.setIsLiked(isLiked: isLiked)
-                UIBlockingProgressHUD.dismiss()
             case .failure(let error):
-                UIBlockingProgressHUD.dismiss()
                 let alert = AlertModel(title: "something went wrong",
                                        message: "check your internet connection\n\(error)",
                                        button: "try again"){}

@@ -16,6 +16,7 @@ enum Constants {
     static let defaultBaseURL = URL(string: "https://api.unsplash.com/")
     static let authorizeURLString: String = "https://unsplash.com/oauth/authorize"
     static let code = "code"
+    static let path = "/oauth/authorize/native"
 }
 
 enum AuthServiceError: Error {
