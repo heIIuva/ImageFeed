@@ -13,7 +13,6 @@ final class SingleImageViewController: UIViewController {
     //MARK: - Properties
     
     var largeImageUrl: URL?
-    private var alertPresenter: AlertPresenterProtocol?
     
     private var imageView: UIImageView?
     private var scrollView: UIScrollView?
@@ -29,10 +28,6 @@ final class SingleImageViewController: UIViewController {
         addBackButton()
         addShareButton()
         setImage()
-        
-        let alertPresenter = AlertPresenter()
-        alertPresenter.delegate = self
-        self.alertPresenter = alertPresenter
     }
     
     private func setupScrollViewAndImageView() {

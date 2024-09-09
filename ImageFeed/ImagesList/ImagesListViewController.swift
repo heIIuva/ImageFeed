@@ -60,6 +60,20 @@ final class ImagesListViewController: UIViewController {
         }
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.tabBarItem = UITabBarItem(title: "",
+                                       image: UIImage(named: "tabEditorialActive"),
+                                       selectedImage: nil)
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        self.tabBarItem = UITabBarItem(title: "",
+                                       image: UIImage(named: "tabEditorialInactive"),
+                                       selectedImage: nil)
+    }
+    
     private func showSingleImageViewController(indexPath: IndexPath) {
         let viewController = SingleImageViewController()
         guard let imageURL = URL(string: photos[indexPath.row].largeImageURL) else { return }

@@ -55,8 +55,19 @@ final class ProfileViewController: UIViewController {
         view.backgroundColor = .ypDark
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        self.tabBarItem = UITabBarItem(title: "",
+                                       image: UIImage(named: "tabProfileActive"),
+                                       selectedImage: nil)
+    }
+    
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
+        self.tabBarItem = UITabBarItem(title: "",
+                                       image: UIImage(named: "tabProfileInactive"),
+                                       selectedImage: nil)
         
         guard let profileImageServiceObserver else { return }
         NotificationCenter.default.removeObserver(profileImageServiceObserver)
