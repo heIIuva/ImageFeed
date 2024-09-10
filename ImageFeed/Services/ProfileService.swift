@@ -31,7 +31,7 @@ final class ProfileService {
         }
         var request = URLRequest(url: url)
         request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
-        request.httpMethod = "GET"
+        request.httpMethod = HTTPMethods.get
         return request
     }
     
@@ -73,5 +73,13 @@ final class ProfileService {
         }
         self.task = task
         task.resume()
+    }
+}
+
+//MARK: - Logout
+
+extension ProfileService {
+    func cleanProfile() {
+        self.profile = nil
     }
 }

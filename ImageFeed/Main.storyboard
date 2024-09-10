@@ -137,7 +137,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="430" height="224"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zsc-u5-rig" userLabel="Gradient View">
+                                                <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="zsc-u5-rig" userLabel="Gradient View">
                                                     <rect key="frame" x="16" y="196" width="398" height="16"/>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 </view>
@@ -151,7 +151,7 @@
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                                     </userDefinedRuntimeAttributes>
                                                 </imageView>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sdE-8c-JJO" userLabel="Like Button">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" pointerInteraction="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sdE-8c-JJO" userLabel="Like Button">
                                                     <rect key="frame" x="370" y="4" width="44" height="44"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="44" id="TdL-nv-CnJ"/>
@@ -159,11 +159,15 @@
                                                     </constraints>
                                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                     <state key="normal" image="likeButtonOn"/>
+                                                    <connections>
+                                                        <action selector="likeButtonClicked" destination="pZ9-It-hcX" eventType="touchUpInside" id="o4U-MP-hf6"/>
+                                                    </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="27 августа 2022" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zZ7-qv-kLf" userLabel="Date Label">
                                                     <rect key="frame" x="24.000000000000007" y="196" width="96.666666666666686" height="16"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
-                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="textColor" name="ypWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -213,96 +217,17 @@
                     </tabBarItem>
                     <connections>
                         <outlet property="tableView" destination="0ZD-Gs-GgP" id="Fuw-16-5ad"/>
-                        <segue destination="iL1-RN-h5A" kind="presentation" identifier="ShowSingleImage" modalPresentationStyle="fullScreen" id="Amx-hG-iiO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1920" y="1864"/>
         </scene>
-        <!--Single Image View Controller-->
-        <scene sceneID="XNm-ym-NIy">
-            <objects>
-                <viewController id="iL1-RN-h5A" customClass="SingleImageViewController" customModule="ImageFeed" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="LqD-GE-wPi">
-                        <rect key="frame" x="0.0" y="0.0" width="430" height="932"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="opB-GE-E3e">
-                                <rect key="frame" x="0.0" y="0.0" width="430" height="932"/>
-                                <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="0" translatesAutoresizingMaskIntoConstraints="NO" id="eP3-EB-VaR" userLabel="imageView">
-                                        <rect key="frame" x="0.0" y="0.0" width="1600" height="1059"/>
-                                    </imageView>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstItem="Nh6-oy-bz4" firstAttribute="trailing" secondItem="eP3-EB-VaR" secondAttribute="trailing" id="LHT-Iw-Oe3"/>
-                                    <constraint firstItem="eP3-EB-VaR" firstAttribute="leading" secondItem="Nh6-oy-bz4" secondAttribute="leading" id="Ovk-iR-m1b"/>
-                                    <constraint firstItem="Nh6-oy-bz4" firstAttribute="bottom" secondItem="eP3-EB-VaR" secondAttribute="bottom" id="a6G-Um-Agn"/>
-                                    <constraint firstItem="eP3-EB-VaR" firstAttribute="top" secondItem="Nh6-oy-bz4" secondAttribute="top" id="jdd-lG-N54"/>
-                                </constraints>
-                                <viewLayoutGuide key="contentLayoutGuide" id="Nh6-oy-bz4"/>
-                                <viewLayoutGuide key="frameLayoutGuide" id="6Bx-77-t8M"/>
-                                <connections>
-                                    <outlet property="delegate" destination="iL1-RN-h5A" id="IjQ-UG-67V"/>
-                                </connections>
-                            </scrollView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iwW-zm-dtH" userLabel="goBackButton">
-                                <rect key="frame" x="8" y="8" width="48" height="48"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="iwW-zm-dtH" secondAttribute="height" multiplier="1:1" id="7hK-bq-i8d"/>
-                                    <constraint firstAttribute="height" constant="48" id="7m0-ny-Jda"/>
-                                    <constraint firstAttribute="width" constant="48" id="Ysm-qs-Lvq"/>
-                                </constraints>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="goBackButton"/>
-                                <connections>
-                                    <action selector="didTapBackButton" destination="iL1-RN-h5A" eventType="touchUpInside" id="Svn-oe-Mqj"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zsf-1r-LiC" userLabel="shareButton">
-                                <rect key="frame" x="190" y="865" width="50" height="50"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="8Ny-Fa-Q6W"/>
-                                    <constraint firstAttribute="width" secondItem="zsf-1r-LiC" secondAttribute="height" multiplier="1:1" id="koU-49-4PE"/>
-                                    <constraint firstAttribute="width" constant="50" id="mfY-XE-hRs"/>
-                                </constraints>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="shareButton"/>
-                                <connections>
-                                    <action selector="didTapShareButton:" destination="iL1-RN-h5A" eventType="touchUpInside" id="uqJ-Wl-ekI"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="Wp9-X3-ZAA"/>
-                        <color key="backgroundColor" name="ypDark"/>
-                        <constraints>
-                            <constraint firstItem="opB-GE-E3e" firstAttribute="top" secondItem="LqD-GE-wPi" secondAttribute="top" id="3I0-5g-LW0"/>
-                            <constraint firstItem="zsf-1r-LiC" firstAttribute="centerX" secondItem="Wp9-X3-ZAA" secondAttribute="centerX" id="7tF-af-K5o"/>
-                            <constraint firstItem="iwW-zm-dtH" firstAttribute="leading" secondItem="Wp9-X3-ZAA" secondAttribute="leading" constant="8" id="AJu-wg-ssR"/>
-                            <constraint firstItem="Wp9-X3-ZAA" firstAttribute="bottom" secondItem="zsf-1r-LiC" secondAttribute="bottom" constant="17" id="DJm-H1-oV7"/>
-                            <constraint firstItem="Wp9-X3-ZAA" firstAttribute="trailing" secondItem="opB-GE-E3e" secondAttribute="trailing" id="IdC-9h-FGk"/>
-                            <constraint firstItem="opB-GE-E3e" firstAttribute="leading" secondItem="Wp9-X3-ZAA" secondAttribute="leading" id="ZbB-ru-7eS"/>
-                            <constraint firstAttribute="bottom" secondItem="opB-GE-E3e" secondAttribute="bottom" id="Zjf-u8-GaH"/>
-                            <constraint firstItem="iwW-zm-dtH" firstAttribute="top" secondItem="Wp9-X3-ZAA" secondAttribute="top" constant="8" id="v3Y-Xh-Vcv"/>
-                        </constraints>
-                    </view>
-                    <connections>
-                        <outlet property="imageView" destination="eP3-EB-VaR" id="Vcg-4u-L5e"/>
-                        <outlet property="scrollView" destination="opB-GE-E3e" id="dLS-of-ITX"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="vro-0W-WWy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-1007" y="1864"/>
-        </scene>
     </scenes>
     <resources>
         <image name="0" width="1600" height="1059"/>
         <image name="authScreenLogo" width="60" height="60"/>
-        <image name="goBackButton" width="24" height="24"/>
         <image name="likeButtonOn" width="42" height="42"/>
-        <image name="shareButton" width="51" height="51"/>
         <image name="tabEditorialActive" width="30" height="30"/>
         <namedColor name="AccentColor">
             <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

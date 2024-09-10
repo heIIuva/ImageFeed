@@ -29,6 +29,15 @@ final class AlertPresenter: UIAlertController, AlertPresenterProtocol {
         
         alert.addAction(action)
         
+        if let secondButton = result.secondButton,
+           let secondCompletion = result.secondCompletion {
+            let secondAction = UIAlertAction(title: secondButton,
+                                             style: .default) { _ in
+                secondCompletion()
+            }
+            alert.addAction(secondAction)
+        }
+        
         delegate?.present(alert, animated: true)
     }
 }

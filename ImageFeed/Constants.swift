@@ -16,9 +16,16 @@ enum Constants {
     static let defaultBaseURL = URL(string: "https://api.unsplash.com/")
     static let authorizeURLString: String = "https://unsplash.com/oauth/authorize"
     static let code = "code"
+    static let path = "/oauth/authorize/native"
 }
 
 enum AuthServiceError: Error {
     case invalidRequest
+}
+
+enum HTTPMethods {
+    static let get = "GET"
+    static let post = "POST"
+    static let delete = "DELETE"
 }
 

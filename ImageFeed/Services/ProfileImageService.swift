@@ -22,7 +22,7 @@ final class ProfileImageService {
     private let urlSession = URLSession.shared
     
     private var task: URLSessionTask?
-    private (set) var avatarURL: String?
+    private(set) var avatarURL: String?
     
     //MARK: - Methods
     
@@ -33,7 +33,7 @@ final class ProfileImageService {
         }
         var request = URLRequest(url: url)
         request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
-        request.httpMethod = "GET"
+        request.httpMethod = HTTPMethods.get
         return request
     }
     
@@ -82,3 +82,10 @@ final class ProfileImageService {
     }
 }
 
+//MARK: - Logout
+
+extension ProfileImageService {
+    func cleanAvatar() {
+        self.avatarURL = nil
+    }
+}

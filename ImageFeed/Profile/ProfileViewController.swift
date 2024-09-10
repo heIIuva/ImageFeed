@@ -18,12 +18,14 @@ final class ProfileViewController: UIViewController {
     private let profileImageService = ProfileImageService.shared
     private let profileData = ProfileService.shared.profile
     private let storage = OAuth2Storage.shared
+    private let logoutService = ProfileLogoutService.shared
+    private var alertPresenter: AlertPresenterProtocol?
     
-    private var profileImageView: UIImageView? {
-        didSet {
-            profileImageView?.rounded()
-        }
-    }
+    private lazy var profileImageView: UIImageView? = {
+        let profileImageView = UIImageView()
+        profileImageView.rounded()
+        return profileImageView
+    }()
     private var nameLabel: UILabel?
     private var loginLabel: UILabel?
     private var bioLabel: UILabel?
@@ -33,6 +35,10 @@ final class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let alertPresenter = AlertPresenter()
+        alertPresenter.delegate = self
+        self.alertPresenter = alertPresenter
         
         setUpProfileImageView()
         setUpLogoutbutton()
@@ -54,8 +60,19 @@ final class ProfileViewController: UIViewController {
         view.backgroundColor = .ypDark
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        self.tabBarItem = UITabBarItem(title: "",
+                                       image: UIImage(named: "tabProfileActive"),
+                                       selectedImage: nil)
+    }
+    
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
+        self.tabBarItem = UITabBarItem(title: "",
+                                       image: UIImage(named: "tabProfileInactive"),
+                                       selectedImage: nil)
         
         guard let profileImageServiceObserver else { return }
         NotificationCenter.default.removeObserver(profileImageServiceObserver)
@@ -130,6 +147,7 @@ final class ProfileViewController: UIViewController {
             label.backgroundColor = .ypDark
             label.translatesAutoresizingMaskIntoConstraints = false
             view.addSubview(label)
+        }
         
         guard let profileImageView else { return }
         NSLayoutConstraint.activate([
@@ -157,6 +175,14 @@ final class ProfileViewController: UIViewController {
     
     @objc
     private func didTapLogoutButton() {
-        //TODO: add logout functionality
+        let viewModel = AlertModel(title: "Пока, пока!",
+                                   message: "Уверены что хотите выйти?",
+                                   button: "Да",
+                                   completion: { self.logoutService.logout() },
+                                   secondButton: "Нет",
+                                   secondCompletion: {self.dismiss(animated: true)})
+        alertPresenter?.showAlert(result: viewModel)
+        
     }
 }
+
