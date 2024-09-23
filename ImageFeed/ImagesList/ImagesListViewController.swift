@@ -8,6 +8,12 @@
 import UIKit
 import Kingfisher
 
+
+protocol imagesListViewControllerProtocol: AnyObject {
+    var presenter: ImagesListPresenterProtocol { get set }
+}
+
+
 final class ImagesListViewController: UIViewController {
     
     //MARK: - Outlets
@@ -103,8 +109,10 @@ extension ImagesListViewController: UITableViewDataSource {
         }
         
         cell.delegate = self
-        configCell(for: cell, with: indexPath)
-
+        if cell.configCell(photo: photos[indexPath.row]) {
+          tableView.reloadRows(at: [indexPath], with: .automatic)
+        }
+        
         return cell
     }
     
@@ -118,22 +126,6 @@ extension ImagesListViewController: UITableViewDataSource {
 
 
 extension ImagesListViewController {
-    func configCell(for cell: ImagesListCell, with indexPath: IndexPath) {
-        let imageURL = photos[indexPath.row].thumbImageURL
-        guard let url = URL(string: imageURL) else { return }
-        
-        let processor = RoundCornerImageProcessor(cornerRadius: 20)
-        cell.cellImage.kf.indicatorType = .activity
-        cell.cellImage.kf.setImage(with: url,
-                                   placeholder: UIImage(named: "stub"),
-                                   options: [.processor(processor)])
-        cell.dateLabel.text = dateFormatter.string(from: photos[indexPath.row].createdAt ?? Date())
-        cell.layer.cornerRadius = 16
-        
-        let photo = photos[indexPath.row]
-        cell.setIsLiked(isLiked: photo.isLiked)
-    }
-    
     func updateTableViewAnimated() {
         DispatchQueue.main.async { [weak self] in
             guard let self else { return }

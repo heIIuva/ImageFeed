@@ -22,7 +22,7 @@ final class SplashViewController: UIViewController {
     private let profileService = ProfileService.shared
     private let oAuth2Service = OAuth2Service.shared
     private let storage = OAuth2Storage.shared
-    
+    private var alertPresenter: AlertPresenterProtocol?
     //MARK: - Propeties
     
     private var logo: UIImageView?
@@ -34,6 +34,10 @@ final class SplashViewController: UIViewController {
 
         addLogo()
         view.backgroundColor = .ypDark
+        
+        let alertPresenter = AlertPresenter()
+        alertPresenter.delegate = self
+        self.alertPresenter = alertPresenter
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -114,8 +118,14 @@ extension SplashViewController: AuthViewControllerDelegate {
                 self.showTabBarController()
 
             case .failure:
-                // TODO [Sprint 11] Покажите ошибку получения профиля
-                break
+                let completion = { [weak self] in
+                    guard let self else { return }
+                    self.navigationController?.popViewController(animated: true) }
+                let viewModel = AlertModel(title: "something went wrong",
+                                           message: "an error occured",
+                                           button: "try again",
+                                           completion: completion)
+                alertPresenter?.showAlert(result: viewModel)
             }
         }
     }
