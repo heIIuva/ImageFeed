@@ -9,6 +9,11 @@ import UIKit
 import Kingfisher
 
 
+protocol ProfileViewControllerProtocol: AnyObject {
+    var presenter: ProfilePresenterProtocol? { get set }
+}
+
+
 final class ProfileViewController: UIViewController {
     
     //MARK: - Properties

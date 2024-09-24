@@ -17,9 +17,13 @@ final class TabBarViewController: UITabBarController {
         
         let storyboard = UIStoryboard(name: "Main", bundle: .main)
         
-        let imagesListViewController = storyboard.instantiateViewController(withIdentifier: "ImagesListViewController")
+        guard let imagesListViewController = storyboard.instantiateViewController(withIdentifier: "ImagesListViewController") as? ImagesListViewController else { return }
         imagesListViewController.tabBarItem = UITabBarItem(title: "",
                                                            image: UIImage(named: "tabEditorialInactive"), selectedImage: nil)
+        let imagesListPresenter = ImagesListPresenter(alertPresenter: AlertPresenter())
+        imagesListViewController.presenter = imagesListPresenter
+        imagesListPresenter.view = imagesListViewController
+        
         
         let profileViewController = ProfileViewController()
         profileViewController.tabBarItem = UITabBarItem(title: "",
