@@ -5,7 +5,7 @@
 //  Created by big stepper on 24/09/2024.
 //
 
-import UIKit
+import Foundation
 import Kingfisher
 
 
