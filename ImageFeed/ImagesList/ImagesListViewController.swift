@@ -14,7 +14,6 @@ protocol ImagesListViewControllerProtocol: AnyObject {
     var tableView: UITableView! { get set }
     var photos: [Photo] { get set }
     func updateTableViewAnimated()
-    func configure(presenter: ImagesListPresenterProtocol)
 }
 
 
@@ -52,9 +51,7 @@ final class ImagesListViewController: UIViewController, ImagesListViewController
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        guard let presenter else { return }
-        configure(presenter: presenter)
-        presenter.viewDidLoad()
+        presenter?.viewDidLoad()
     
         tableView.rowHeight = 200
         tableView.contentInset = UIEdgeInsets(top: 12, left: 0, bottom: 12, right: 0)
@@ -88,10 +85,6 @@ final class ImagesListViewController: UIViewController, ImagesListViewController
     
     private func updateTableView() {
         presenter?.updateTableView()
-    }
-    
-    func configure(presenter: ImagesListPresenterProtocol) {
-        presenter.view = self
     }
 }
 
