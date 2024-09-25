@@ -29,7 +29,7 @@ final class ProfileViewController: UIViewController, ProfileViewControllerProtoc
     private let profileData = ProfileService.shared.profile
     
     lazy var profileImageView: UIImageView? = {
-        let profileImage = UIImage(named: "profilePicture")
+        let profileImage = UIImage(named: "avatarPlaceholder")
         let profileImageView = UIImageView(image: profileImage)
         profileImageView.backgroundColor = .ypDark
         profileImageView.translatesAutoresizingMaskIntoConstraints = false
@@ -76,6 +76,7 @@ final class ProfileViewController: UIViewController, ProfileViewControllerProtoc
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        presenter?.viewDidLoad()
         
         setUpProfileImageView()
         setUpLogoutbutton()
@@ -99,6 +100,7 @@ final class ProfileViewController: UIViewController, ProfileViewControllerProtoc
         self.tabBarItem = UITabBarItem(title: "",
                                        image: UIImage(named: "tabProfileInactive"),
                                        selectedImage: nil)
+        presenter?.viewDidDisappear()
     }
     
     //MARK: - UI Methods

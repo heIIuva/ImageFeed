@@ -47,6 +47,8 @@
 		B5F0F7D32C85C63300500C84 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F0F7D22C85C63300500C84 /* Photo.swift */; };
 		B5F0F7D52C85C65400500C84 /* ImagesListService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F0F7D42C85C65400500C84 /* ImagesListService.swift */; };
 		B5FBF8142CA2FC8C00D50295 /* ProfilePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FBF8132CA2FC8600D50295 /* ProfilePresenter.swift */; };
+		B5FBF8162CA3F18900D50295 /* ProfileTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FBF8152CA3F18400D50295 /* ProfileTests.swift */; };
+		B5FBF8182CA3FD6B00D50295 /* ImagesListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FBF8172CA3FD6100D50295 /* ImagesListTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -100,6 +102,8 @@
 		B5F0F7D22C85C63300500C84 /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 		B5F0F7D42C85C65400500C84 /* ImagesListService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesListService.swift; sourceTree = "<group>"; };
 		B5FBF8132CA2FC8600D50295 /* ProfilePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePresenter.swift; sourceTree = "<group>"; };
+		B5FBF8152CA3F18400D50295 /* ProfileTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTests.swift; sourceTree = "<group>"; };
+		B5FBF8172CA3FD6100D50295 /* ImagesListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesListTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,6 +140,8 @@
 		B58FEAA52CA1C81E00D48BC8 /* Image FeedTests */ = {
 			isa = PBXGroup;
 			children = (
+				B5FBF8172CA3FD6100D50295 /* ImagesListTests.swift */,
+				B5FBF8152CA3F18400D50295 /* ProfileTests.swift */,
 				B58FEAA42CA1C81E00D48BC8 /* WebViewTests.swift */,
 			);
 			path = "Image FeedTests";
@@ -388,7 +394,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B5FBF8182CA3FD6B00D50295 /* ImagesListTests.swift in Sources */,
 				B58FEAA72CA1C81E00D48BC8 /* WebViewTests.swift in Sources */,
+				B5FBF8162CA3F18900D50295 /* ProfileTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

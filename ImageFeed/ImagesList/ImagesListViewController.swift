@@ -36,7 +36,7 @@ final class ImagesListViewController: UIViewController, ImagesListViewController
     
     //MARK: - Init
     
-    init(presenter: ImagesListPresenter) {
+    init(presenter: ImagesListPresenterProtocol) {
         self.presenter = presenter
         super.init(nibName: nil,
                    bundle: nil)
@@ -154,6 +154,6 @@ extension ImagesListViewController: UITableViewDelegate {
 
 extension ImagesListViewController: ImagesListCellDelegate {
     func imageListCellDidTapLike(_ cell: ImagesListCell) {
-        presenter?.imageListCellDidTapLike(cell)
+        presenter?.imagesListDidTapLike(cell)
     }
 }

@@ -18,9 +18,9 @@ struct ProfileResult: Codable {
 struct Profile {
     let profileResult: ProfileResult
     var username: String { profileResult.username }
-    var name: String { profileResult.firstName + " " + (profileResult.lastName ?? "")}
-    var loginName: String { "@" + username}
-    var bio: String { profileResult.bio ?? ""}
+    var name: String { profileResult.firstName + " " + (profileResult.lastName ?? "") }
+    var loginName: String { "@" + username }
+    var bio: String { profileResult.bio ?? "" }
 }
 
 struct UserResult: Codable {

@@ -12,7 +12,7 @@ protocol ImagesListPresenterProtocol: AnyObject {
     var view: ImagesListViewControllerProtocol? { get set }
     func viewDidLoad()
     func viewDidDisappear()
-    func imageListCellDidTapLike(_ cell: ImagesListCell)
+    func imagesListDidTapLike(_ cell: ImagesListCell)
     func tableViewWillDisplay(indexPath: IndexPath)
     func updateTableView()
 }
@@ -53,7 +53,7 @@ final class ImagesListPresenter: ImagesListPresenterProtocol {
         NotificationCenter.default.removeObserver(imagesListServiceObserver)
     }
     
-    func imageListCellDidTapLike(_ cell: ImagesListCell) {
+    func imagesListDidTapLike(_ cell: ImagesListCell) {
         guard let view else { return }
         guard let token = storage.token,
               let indexPath = view.tableView.indexPath(for: cell) else { return }
