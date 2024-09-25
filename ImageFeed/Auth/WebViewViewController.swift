@@ -26,7 +26,11 @@ final class WebViewViewController: UIViewController, WebViewViewControllerProtoc
     
     //MARK: - Outlets
     
-    @IBOutlet private weak var webView: WKWebView!
+    @IBOutlet private weak var webView: WKWebView! {
+        didSet {
+            webView.accessibilityIdentifier = "webView"
+        }
+    }
     @IBOutlet private weak var progressView: UIProgressView!
     
     //MARK: - Methods

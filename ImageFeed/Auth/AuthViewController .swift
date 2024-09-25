@@ -36,6 +36,7 @@ final class AuthViewController: UIViewController {
             loginButton.layer.cornerRadius = 16
             loginButton.layer.masksToBounds = true
             loginButton.titleLabel?.font = .SFPro.withSize(17).withWeight(.bold)
+            loginButton.accessibilityIdentifier = "loginButton"
         }
     }
     

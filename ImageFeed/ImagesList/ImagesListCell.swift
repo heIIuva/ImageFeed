@@ -28,7 +28,12 @@ final class ImagesListCell: UITableViewCell {
     //MARK: - Outlets
     
     @IBOutlet weak var cellImage: UIImageView!
-    @IBOutlet weak var likeButton: UIButton!
+    @IBOutlet weak var likeButton: UIButton! {
+        didSet {
+            likeButton.accessibilityIdentifier = "likeButton"
+            likeButton.isAccessibilityElement = true
+        }
+    }
     @IBOutlet weak var dateLabel: UILabel! {
         didSet {
             dateLabel.font = .SFPro.withSize(13).withWeight(.medium)

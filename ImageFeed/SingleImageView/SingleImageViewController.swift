@@ -17,7 +17,11 @@ final class SingleImageViewController: UIViewController {
     private var imageView: UIImageView?
     private var scrollView: UIScrollView?
     private var shareButton: UIButton?
-    private var backButton: UIButton?
+    private lazy var backButton: UIButton? = {
+        let backButton = UIButton()
+        backButton.accessibilityIdentifier = "backButton"
+        return backButton
+    }()
     
     //MARK: - Methods
     

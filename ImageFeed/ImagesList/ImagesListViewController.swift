@@ -21,11 +21,11 @@ final class ImagesListViewController: UIViewController, ImagesListViewController
 
     //MARK: - Outlets
     
-    @IBOutlet lazy var tableView: UITableView! = {
-        let tableView = UITableView()
-        tableView.backgroundColor = UIColor.ypDark
-        return tableView
-    }()
+    @IBOutlet weak var tableView: UITableView! {
+        didSet {
+            tableView.accessibilityIdentifier = "tableView"
+        }
+    }
     
     //MARK: - Properties
         
