@@ -36,6 +36,7 @@ final class AuthViewController: UIViewController {
             loginButton.layer.cornerRadius = 16
             loginButton.layer.masksToBounds = true
             loginButton.titleLabel?.font = .SFPro.withSize(17).withWeight(.bold)
+            loginButton.accessibilityIdentifier = "loginButton"
         }
     }
     
@@ -56,6 +57,10 @@ final class AuthViewController: UIViewController {
             segue.identifier == WebViewSegueIdentifier,
             let webViewViewController = segue.destination as? WebViewViewController
         {
+            let authHelper = AuthHelper()
+            let webViewPresenter = WebViewPresenter(authHelper: authHelper)
+            webViewViewController.presenter = webViewPresenter
+            webViewPresenter.view = webViewViewController
             webViewViewController.delegate = self
         } else {
             super.prepare(for: segue, sender: sender)
@@ -108,7 +113,5 @@ extension AuthViewController: WebViewViewControllerDelegate {
         }
     }
     
-    func webViewViewControllerDidCancel(_ vc: WebViewViewController) {
-        //TODO: 
-    }
+    func webViewViewControllerDidCancel(_ vc: WebViewViewController) { }
 }

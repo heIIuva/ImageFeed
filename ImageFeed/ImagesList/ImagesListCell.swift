@@ -23,11 +23,17 @@ final class ImagesListCell: UITableViewCell {
     //MARK: - Properties
     
     static let reuseIdentifier: String = "ImagesListCell"
+    let dateFormatter = DateFormatter.dateFormatter
     
     //MARK: - Outlets
     
     @IBOutlet weak var cellImage: UIImageView!
-    @IBOutlet weak var likeButton: UIButton!
+    @IBOutlet weak var likeButton: UIButton! {
+        didSet {
+            likeButton.accessibilityIdentifier = "likeButton"
+            likeButton.isAccessibilityElement = true
+        }
+    }
     @IBOutlet weak var dateLabel: UILabel! {
         didSet {
             dateLabel.font = .SFPro.withSize(13).withWeight(.medium)
@@ -71,6 +77,37 @@ final class ImagesListCell: UITableViewCell {
     func setIsLiked(isLiked: Bool) {
         let liked = isLiked ? UIImage(named: "likeButtonOn") : UIImage(named: "likeButtonOff")
         likeButton.setImage(liked, for: .normal)
+    }
+    
+    func configCell(photo: Photo) -> Bool {
+        var status = false
+        
+        setIsLiked(isLiked: photo.isLiked)
+        
+        guard let url = URL(string: photo.thumbImageURL) else { return status }
+        
+        let processor = RoundCornerImageProcessor(cornerRadius: 20)
+        cellImage.kf.indicatorType = .activity
+        cellImage.kf.setImage(with: url,
+                              placeholder: UIImage(named: "stub"),
+                              options: [.processor(processor)]
+        ){ [weak self] result in
+            guard let self else { return }
+            switch result {
+            case .success(_):
+                status = true
+            case .failure(_):
+                cellImage.image = UIImage(named: "stub")
+            }
+        }
+        
+        guard let date = photo.createdAt else {
+            print("there is no date provided")
+            return status }
+        
+        dateLabel.text = dateFormatter.string(from: date)
+        
+        return status
     }
 }
 
